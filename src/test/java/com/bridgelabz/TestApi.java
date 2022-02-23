@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -13,7 +14,11 @@ public class TestApi {
 	public void getTest() {
 		Response response = RestAssured.get("http://localhost:3000/posts");
 		System.out.println("Response code: "+response.getStatusCode());
-		response.prettyPrint();
+		JsonPath jsonPath = response.jsonPath();
+		//response.prettyPrint();
+		System.out.println("id: " +jsonPath.get("id"));
+		System.out.println("author: " +jsonPath.get("author"));
+		System.out.println("title: " +jsonPath.get("title"));
 	}
 	@Test
 	public void postTest() {
@@ -21,8 +26,8 @@ public class TestApi {
 		requestSpecification.header("Content-Type","application/json");
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("id",11);
-		jsonObject.put("title", "aniket");
-		jsonObject.put("author","myauthor");
+		jsonObject.put("title", "software");
+		jsonObject.put("author","abc");
 		requestSpecification.body(jsonObject.toJSONString());
 		Response response = requestSpecification.post("http://localhost:3000/posts");
 		System.out.println("ResponseCode: "+response.getStatusCode());
@@ -34,10 +39,10 @@ public class TestApi {
 		requestSpecification.header("Content-Type","application/json");
 		JSONObject jsonObject = new JSONObject();
 		//jsonObject.put("id",2);
-		jsonObject.put("body", "aniket2");
-		jsonObject.put("postId",5);
+		jsonObject.put("title", "testing");
+		jsonObject.put("postId",14);
 		requestSpecification.body(jsonObject.toJSONString());
-		Response response = requestSpecification.put("http://localhost:3000/posts/3");
+		Response response = requestSpecification.put("http://localhost:3000/posts/13");
 		System.out.println("ResponseCode: "+response.getStatusCode());
 		response.prettyPrint();
 	}
@@ -46,7 +51,7 @@ public class TestApi {
 	public void deleteTest() {
 		RequestSpecification requestSpecification = RestAssured.given();
 		requestSpecification.header("Content-Type","application/json");
-		Response response = requestSpecification.delete("http://localhost:3000/posts/2");
+		Response response = requestSpecification.delete("http://localhost:3000/posts/4");
 		System.out.println("ResponseCode: "+response.getStatusCode());
 		response.prettyPrint();
 	}
