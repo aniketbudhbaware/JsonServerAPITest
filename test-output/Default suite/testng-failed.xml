@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.bridgelabz.APITestBDD">
+      <class name="com.bridgelabz.PostTest">
         <methods>
-          <include name="postTest1"/>
+          <include name="postTest"/>
         </methods>
-      </class> <!-- com.bridgelabz.APITestBDD -->
+      </class> <!-- com.bridgelabz.PostTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
